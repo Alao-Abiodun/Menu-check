@@ -29,6 +29,36 @@ const addMenu = async (req: Request, res: Response): Promise<any> => {
     }
 }
 
+// find menu by Id using aggregate
+const fetchAMenu = async (req: Request, res: Response): Promise<any> => {
+    try {
+        const menu: IMenu | null = await Menu.findById(req.params.id);
+        return res.status( menu ? 200 : 404).json({
+            success: true,
+            data: menu
+        });
+    } catch (error: any) {
+        throw error;
+    }
+}
+
+// update menu by id using aggregate function
+const updateMenu = async (req: Request, res: Response): Promise<any> => {
+    try {
+        const menu: IMenu | null = await Menu.findByIdAndUpdate(req.params.id, req.body, {new: true});
+        return res.status( menu ? 200 : 404).json({
+            success: true,
+            data: menu
+        });
+    } catch (error: any) {
+        throw error;
+    }
+}
+
+
+
+
+
 
 
 
