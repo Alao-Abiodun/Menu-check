@@ -55,6 +55,26 @@ const updateMenu = async (req: Request, res: Response): Promise<any> => {
     }
 }
 
+const removeMenu = async (req: Request, res: Response): Promise<any> => {
+    try {
+        const menu: IMenu | null = await Menu.findByIdAndRemove(req.params.id);
+        return res.status( menu ? 200 : 404).json({
+            success: true,
+            data: menu
+        });
+    } catch (error: any) {
+        throw error;
+    }
+} 
+
+module.exports = {
+    getMenus,
+    addMenu,
+    fetchAMenu,
+    updateMenu,
+    removeMenu
+}
+
 
 
 
